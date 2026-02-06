@@ -26,7 +26,10 @@ async def on_message(message):
 
     content = message.content.strip()
 
-    markov.train(content)
+    if not content.startswith(bot.command_prefix):
+        markov.train(content)
+        markov.save()
+
     await bot.process_commands(message)
 
 
